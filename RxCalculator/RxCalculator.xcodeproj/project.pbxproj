@@ -15,6 +15,7 @@
 		726A7A8E243A1FA5003A0B17 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A7A8D243A1FA5003A0B17 /* CalculatorView.swift */; };
 		726A7A90243A2029003A0B17 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A7A8F243A2029003A0B17 /* UIViewExtension.swift */; };
 		726A7A93243A21C0003A0B17 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A7A92243A21C0003A0B17 /* CalculatorViewController.swift */; };
+		72852ADA24400D1D004B9AA6 /* ObservableTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72852AD924400D1D004B9AA6 /* ObservableTypeExtension.swift */; };
 		72872EAA243F6DB800F7C2F1 /* CalculatorViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72872EA9243F6DB800F7C2F1 /* CalculatorViewReactor.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		726A7A8D243A1FA5003A0B17 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculatorView.swift; path = View/CalculatorView.swift; sourceTree = "<group>"; };
 		726A7A8F243A2029003A0B17 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		726A7A92243A21C0003A0B17 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculatorViewController.swift; path = Controller/CalculatorViewController.swift; sourceTree = "<group>"; };
+		72852AD924400D1D004B9AA6 /* ObservableTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTypeExtension.swift; sourceTree = "<group>"; };
 		72872EA9243F6DB800F7C2F1 /* CalculatorViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewReactor.swift; sourceTree = "<group>"; };
 		DE44E41445B34B89FFB88F59 /* Pods-RxCalculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxCalculator.release.xcconfig"; path = "Target Support Files/Pods-RxCalculator/Pods-RxCalculator.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,9 +70,9 @@
 			isa = PBXGroup;
 			children = (
 				726A7A8B243A1F76003A0B17 /* OperationModel.swift */,
-				72872EA9243F6DB800F7C2F1 /* CalculatorViewReactor.swift */,
 				726A7A8D243A1FA5003A0B17 /* CalculatorView.swift */,
 				726A7A92243A21C0003A0B17 /* CalculatorViewController.swift */,
+				72872EA9243F6DB800F7C2F1 /* CalculatorViewReactor.swift */,
 				726A7A86243A1D3A003A0B17 /* Application */,
 				726A7A91243A202B003A0B17 /* Extension */,
 				726A7A87243A1D57003A0B17 /* Resource */,
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				726A7A8F243A2029003A0B17 /* UIViewExtension.swift */,
+				72852AD924400D1D004B9AA6 /* ObservableTypeExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				72872EAA243F6DB800F7C2F1 /* CalculatorViewReactor.swift in Sources */,
 				726A7A90243A2029003A0B17 /* UIViewExtension.swift in Sources */,
 				726A7A8C243A1F76003A0B17 /* OperationModel.swift in Sources */,
+				72852ADA24400D1D004B9AA6 /* ObservableTypeExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

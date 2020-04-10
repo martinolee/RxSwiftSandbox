@@ -8,31 +8,18 @@
 
 import RxSwift
 import RxCocoa
+import ReactorKit
 import UIKit
 import Then
 import SnapKit
 
-protocol CalculatorViewDeleate: class {
-  func lhsTextFieldEditingDidChange(_ textField: UITextField, _ text: String)
-  
-  func rhsTextFieldEditingDidChange(_ textField: UITextField, _ text: String)
-  
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-}
-
-final class CalculatorView: UIView {
+final class CalculatorView: UIView, View {
   // MARK: - Properties
   
-  weak var delegate: CalculatorViewDeleate?
-  
-  private let disposeBag = DisposeBag()
+  var disposeBag = DisposeBag()
   
   private lazy var lhsTextField = UITextField().then {
     setupTextFieldStyle($0)
-    
-    $0.delegate = self
-    
-    $0.addTarget(self, action: #selector(lhsTextFieldEditingDidChange(_:)), for: .editingChanged)
   }
   
   private let operatorImageView = UIImageView().then {
@@ -42,10 +29,6 @@ final class CalculatorView: UIView {
   
   private lazy var rhsTextField = UITextField().then {
     setupTextFieldStyle($0)
-    
-    $0.delegate = self
-    
-    $0.addTarget(self, action: #selector(rhsTextFieldEditingDidChange(_:)), for: .editingChanged)
   }
   
   private let equalsSignImageView = UIImageView().then {
@@ -71,6 +54,25 @@ final class CalculatorView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func bind(reactor: CalculatorViewReactor) {
+    lhsTextField.rx.controlEvent(.editingChanged)
+      .map { Reactor.Action.lhsChanged(self.lhsTextField.text) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    
+    rhsTextField.rx.controlEvent(.editingChanged)
+      .map { Reactor.Action.rhsChanged(self.rhsTextField.text) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    
+    reactor.state.map { $0.sum }
+      .filterNil()
+      .distinctUntilChanged()
+      .map { "\($0)" }
+      .bind(to: resultLabel.rx.text)
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Setup UI
@@ -122,31 +124,3 @@ final class CalculatorView: UIView {
     }
   }
 }
-
-// MARK: - Action Handler
-
-extension CalculatorView {
-  @objc
-  private func lhsTextFieldEditingDidChange(_ textField: UITextField) {
-    delegate?.lhsTextFieldEditingDidChange(textField, textField.text ?? "")
-  }
-  
-  @objc
-  private func rhsTextFieldEditingDidChange(_ textField: UITextField) {
-    delegate?.rhsTextFieldEditingDidChange(textField, textField.text ?? "")
-  }
-}
-
-extension CalculatorView: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    guard let delegate = delegate else { fatalError() }
-    return delegate.textField(textField, shouldChangeCharactersIn: range, replacementString: string)
-  }
-}
-
-// MARK: - Element Control
-
-extension CalculatorView {
-  func setResultLabelText(_ text: String) { resultLabel.text = text }
-}
-
